@@ -6,7 +6,7 @@ Access = {
 
 
 	Usergroups = {
-
+		"superadmin",
 		"admin"
 
 	},
