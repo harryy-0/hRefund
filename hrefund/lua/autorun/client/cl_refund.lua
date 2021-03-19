@@ -209,7 +209,7 @@ net.Receive("hrefund_errormessage", function()
 
 end)
 
-print(LocalPlayer():GetModel())
+
 
 
 
