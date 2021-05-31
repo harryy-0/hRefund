@@ -3,26 +3,19 @@ util.AddNetworkString("hrefund_giverefund")
 util.AddNetworkString("hrefund_errormessage")
 
 Access = {
-
-
 	Usergroups = {
 		"superadmin",
 		"admin"
-
 	},
-
+	
 	SteamIDs = {
-
-
 		"76561198114248672"
-
 	}
 }
 
 
 
 hook.Add("PlayerSay", "RefundCommand", function(ply, txt)
-
 
 	if ( string.lower( txt ) == "!refund" ) then
 
@@ -31,32 +24,23 @@ hook.Add("PlayerSay", "RefundCommand", function(ply, txt)
 	hrefund_message("You do not have access to the menu.", ply)
 
 	return end
-
 		net.Start("hrefund_openui")
 		net.Send(ply)
-
 	end
-
-
 end)
 
 
 function hrefund_message(msg, ply)
-
-
 	net.Start("hrefund_errormessage")
 	net.WriteString(msg)
 	net.Send(ply)
-	
 end
 
 
 net.Receive("hrefund_giverefund", function(_, ply)
 
 	if (not table.HasValue(Access.Usergroups, ply:GetUserGroup())) and (not table.HasValue(Access.SteamIDs, ply:SteamID64())) then 
-
 	hrefund_message("You do not have access to the menu.", ply)
-
 	return end
 
 
@@ -94,10 +78,7 @@ net.Receive("hrefund_giverefund", function(_, ply)
 		
 		target:Give(refundItem)
 		hrefund_message("You have refunded "..target:Nick().." "..refundItem..".", ply)
-
-
-	end
-	
+	end	
 end)
 
 
