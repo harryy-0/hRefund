@@ -125,15 +125,9 @@ local panel = vgui.Create("DFrame")
     refundtextbox:SetHeight(40)
     refundtextbox:Dock( BOTTOM )
     refundtextbox:DockMargin(5, 0, 5, 15)
-
-                    
-
-            
-     
-
-    for k,v  in pairs(player.GetAll()) do
     
-
+    for k,v  in pairs(player.GetAll()) do
+   
     players = vgui.Create("DButton", playerpanel)
     players:SetSize(300, 30)
     players:Dock(TOP)
@@ -141,9 +135,6 @@ local panel = vgui.Create("DFrame")
     players:TDLib()
         :Text(v:Nick(), "DermaDefault", Color(199,199,199), TEXT_ALIGN_LEFT, 0)
         :Background(Color(107, 107, 107), 0)
-
-    
-
 
     function players:DoClick()
         playerpanel:SetVisible(false) 
@@ -165,48 +156,30 @@ local panel = vgui.Create("DFrame")
          playerrank:TDLib()
             :Text("Rank: ".. v:GetUserGroup(), "DermaDefault", Color(199,199,199), TEXT_ALIGN_LEFT, 5)
     end
-
-
 end
 
 function refundbutton:DoClick()
-
-        if weaponcheckbox:GetChecked() == true and moneycheckbox:GetChecked() == true then
-
-        chat.AddText( color_green,"Refund | ", color_white, "You can not check two boxes.")
-
-        return
-end
-
-
-
+    if weaponcheckbox:GetChecked() == true and moneycheckbox:GetChecked() == true then
+            chat.AddText( color_green,"Refund | ", color_white, "You can not check two boxes.")
+    return end
 
     net.Start("hrefund_giverefund")
     net.WriteEntity( vplayer )
     net.WriteBool(moneycheckbox:GetChecked())
     net.WriteString( refundtextbox:GetValue() )
     net.SendToServer()
-
-
-
-end
-
-    
+end  
 end
 
 net.Receive("hrefund_openui", function()
-    
     hrefund_ui()
-
 end)
 
 
 net.Receive("hrefund_errormessage", function()
-    
     local msg = net.ReadString()
-
+        
     chat.AddText( color_green,"Refund | ", color_white, msg)
-
 end)
 
 
