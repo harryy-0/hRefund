@@ -13,8 +13,6 @@ Access = {
 	}
 }
 
-
-
 hook.Add("PlayerSay", "RefundCommand", function(ply, txt)
 
 	if ( string.lower( txt ) == "!refund" ) then
@@ -29,13 +27,11 @@ hook.Add("PlayerSay", "RefundCommand", function(ply, txt)
 	end
 end)
 
-
 function hrefund_message(msg, ply)
 	net.Start("hrefund_errormessage")
 	net.WriteString(msg)
 	net.Send(ply)
 end
-
 
 net.Receive("hrefund_giverefund", function(_, ply)
 
